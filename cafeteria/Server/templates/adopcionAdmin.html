@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+
+  <title>CAT~FETERIA</title>
+  
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-cente">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+    <img src="{{ url_for('static', filename='assets/img/gattito.png') }}" alt="logo" width="60" height="48" class="d-inline-block align-text-top">
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="nav-link scrollto active" href="{{ url_for('IndexAdmin') }}">Menú</a></li>
+      </ul>
+    </nav><!-- .navbar -->
+    
+  </div>
+</header> <br><br><br><br><br><br><br><br><br><br>
+
+
+    <h1>Lista de Adopciones</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Edad</th>
+                <th>Celular</th>
+                <th>Correo</th>
+                <th>Domicilio</th>
+                <th>Parentesco</th>
+                <th>Nombre de Referencia</th>
+                <th>Celular de Referencia</th>
+                <th>Correo de Referencia</th>
+                <th>Domicilio de Referencia</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for adopcion_item in adopcion %}
+            <tr>
+                <td>{{ adopcion_item[0] }}</td>
+                <td>{{ adopcion_item[2] }}</td>
+                <td>{{ adopcion_item[3] }}</td>
+                <td>{{ adopcion_item[4] }}</td>
+                <td>{{ adopcion_item[5] }}</td>
+                <td>{{ adopcion_item[6] }}</td>
+                <td>{{ adopcion_item[7] }}</td>
+                <td>{{ adopcion_item[8] }}</td>
+                <td>{{ adopcion_item[9] }}</td>
+                <td>{{ adopcion_item[10] }}</td>
+                <td>{{ adopcion_item[11] }}</td>
+                <td>{{ adopcion_item[12] }}</td>
+                <td>{{ adopcion_item[13] }}</td>
+                <td>
+                    <form action="{{ url_for('eliminarA')}}" method="post">
+                        <input type="hidden" name="id_adopcion" value="{{ adopcion_item[0] }}">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-info">
+            <h3>CAT~FETERIA</h3>
+            <p>
+              Diego Roque <br>
+              Santi<br>
+              Alexis<br>
+              David <br>
+              <br>
+              <strong>Profesor:</strong> +1 5589 55488 55<br>
+              <strong>Campus:</strong> Ciudad de México<br>
+            </p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 col-md-6 footer-links">
+          <h4>Acerca de nosotros</h4>
+          <ul>
+            <li><i class="bi bi-check-circled"></i> Descripcion</li>
+            <li><i class="bi bi-check-circled"></i> Descripcion</li>
+            <li><i class="bi bi-check-circled"></i> Descripcion</li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6 footer-newsletter">
+          <h4>Si tienes alguna sugerencia</h4>
+          <p>Mandanos correo</p>
+          <form action="" method="post">
+            <input type="email" name="email"><input type="submit" value="Subscribe">
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</footer><!-- End Footer -->
+
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+
+</html>

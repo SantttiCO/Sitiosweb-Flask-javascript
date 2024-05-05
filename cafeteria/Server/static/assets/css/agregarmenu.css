@@ -1,0 +1,52 @@
+.pagina {
+    color: #662E1C;
+    margin: 25px;
+    font-size: 35px;
+}
+
+.paginaMenor {
+    color: #AF4425;
+    margin: 25px;
+    font-size: 25px;
+}
+
+.pagina-0 {
+    color: darkslategray;
+    margin: 25px;
+    font-size: 17px;
+}
+
+.pagina-1 {
+    color: darkslategray;
+    margin: 25px;
+    font-size: 15px;
+}
+
+.formulario {
+    color: black;
+    margin: 25px;
+    font-size: 15px;
+}
+
+.container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    margin-top: 20px;
+}
+
+.navbar {
+    padding: 20px 30px 15px 20px;
+    background-color: #AF4425;
+
+}
+
+.nav-link {
+    color: white;
+}
+
+.navbar-brand {
+    color:white;
+    font-size: xx-large;
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+
+  <title>CAT~FETERIA</title>
+
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-cente">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+    <img src="{{ url_for('static', filename='assets/img/gattito.png') }}" alt="logo" width="60" height="48" class="d-inline-block align-text-top">
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="nav-link scrollto active" >Menú</a></li>
+        <li><a class="nav-link scrollto" href="{{ url_for('adopcion') }}">Adopción</a></li>
+      </ul>
+    </nav><!-- .navbar -->
+    <a href="{{ url_for('login') }}" class="book-a-table-btn scrollto d-none d-lg-flex">Login</a>
+
+  </div>
+</header><!-- End Header -->
+<section class="events">
+  <div class="container" data-aos="fade-up">
+    <div class="container">
+<div class="container" id="adop">
+
+  <p class="pagina">
+    Solicitud de Adopción
+  </p>
+
+  <p class="pagina-0">
+    Llena la siguiente solicitud de manera cuidadosa y atenta. Ten en cuenta que adoptar un gato, es una
+    responsbilidad que colleva compromiso.
+  </p>
+  <form class="formulario" action="{{ url_for('agregarA')}}" method="POST">
+    <p class="paginaMenor">
+      Datos del futuro dueño gatuno
+    </p>
+    <p class="pagina-0">
+      Escribe tus datos de manera cuidadosa y correcta. Los datos solo servirán para contactarlo, no se usarán
+      para fines fuera de la solicitud de adopción de gatos.
+    </p>
+    <p class="pagina-1">
+      <label for="nombre">Nombre</label><br>
+      <input type="text" id="nombre" name="nombre" required><br>
+      <label for="apellidoPat">Apellido Paterno</label><br>
+      <input type="text" id="apellidoPat" name="apellidoPat" required><br>
+      <label for="apellidoMat">Apellido Materno</label><br>
+      <input type="text" id="apellidoMat" name="apellidoMat" required><br>
+      <label for="edad">Edad</label><br>
+      <input type="text" id="edad" name="edad" required><br>
+      <label for="cel">Celular</label><br>
+      <input type="text" id="cel" name="cel" required><br>
+      <label for="dom">Domicilio</label><br>
+      <input type="text" id="dom" name="dom" required><br>
+      <label for="dom">Correo</label><br>
+      <input type="text" id="correo" name="correo" required><br>
+    </p>
+    <p class="paginaMenor">
+      Datos del gato
+    </p>
+    <p class="pagina-0">
+      ¿Qué gato/s vas a adoptar?
+    </p>
+    <p class="pagina-1">
+      {% for gatitos in gatos %}
+      <input type="radio" id="g1" name="gato" value="{{gatitos[0]}}">
+      <label for="g1"> {{gatitos[1]}}</label> <img src="data:image/png;base64,{{ gatitos[4] }}" alt="logo" style="width:70px;"><br>
+      
+    </p>
+    {% endfor %}
+    <p class="paginaMenor">
+      Referencia personal y/o familiar
+    </p>
+    <p class="pagina-0">
+      Por cualquier situación que no lleguemos a contactarlo, necesitamos un contacto alternativo.
+    </p>
+    <p class="pagina-1">
+      <label for="nombrecom">Nombre completo</label><br>
+      <input type="text" id="nombrecom" name="nombrecom" required><br>
+      <label for="paren">Parentesco</label><br>
+      <input type="text" id="paren" name="paren" required><br>
+      <label for="cel">Celular</label><br>
+      <input type="text" id="celO" name="celO" required><br>
+      <label for="dom">Domicilio</label><br>
+      <input type="text" id="domO" name="domO" required><br>
+      <label for="corr">Correo electrónico</label><br>
+      <input type="text" id="corr" name="corr" required><br>
+    </p>
+    <p class="pagina-0">
+      Al darle click en 'Enviar', se hace responsable del felino (si la solicitud es aprobada) y no será
+      sometido a ningún tipo de maltrato ni agresiones.
+    </p>
+    <p class="pagina-0">
+      <button id="botonEnviar" type="submit" class="btn btn-success">Enviar solicitud</button>
+    </p>
+  </form>
+</div>
+  </div>
+  </div>
+</section>
+<!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-3 col-md-6">
+          <div class="footer-info">
+            <h3>CAT~FETERIA</h3>
+            <p>
+              Diego Roque <br>
+              Santi<br>
+              Alexis<br>
+              David <br>
+              <br>
+              <strong>Profesor:</strong> +1 5589 55488 55<br>
+              <strong>Campus:</strong> Ciudad de México<br>
+            </p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 col-md-6 footer-links">
+          <h4>Acerca de nosotros</h4>
+          <ul>
+            <li><i class="bi bi-check-circled"></i> Descripcion</li>
+            <li><i class="bi bi-check-circled"></i> Descripcion</li>
+            <li><i class="bi bi-check-circled"></i> Descripcion</li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6 footer-newsletter">
+          <h4>Si tienes alguna sugerencia</h4>
+          <p>Mandanos correo</p>
+          <form action="" method="post">
+            <input type="email" name="email"><input type="submit" value="Subscribe">
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</footer><!-- End Footer -->
+
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+
+</html>

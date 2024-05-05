@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>
+        CATFETEFERÍA
+        Editar Platillo
+    </title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  
+  
+    <!-- Template Main CSS File -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+    
+</head>
+
+<body>
+    <header id="header" class="fixed-top d-flex align-items-cente">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+          <img src="{{ url_for('static', filename='assets/img/gattito.png') }}" alt="logo" width="60" height="48" class="d-inline-block align-text-top">
+      
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a class="nav-link scrollto active" href="{{ url_for('IndexAdmin') }}">Menú</a></li>
+                <li><a class="nav-link scrollto" href="{{ url_for('adopcionAdmin') }}">Adopción</a></li>
+            </ul>
+          </nav><!-- .navbar -->
+          
+        </div>
+      </header><br><br><br><br><br><br>
+    <div class="container">
+
+        <h1 class="pagina">
+            EDITAR PLATILLO
+        </h1>
+
+        <p class="pagina-0">
+            En este formulario editaras el platillo sea agregado al menú.
+        </p>
+        {% for  alimento in rows %}
+        <form class="formulario" action="{{ url_for('editarP')}}" method="POST" enctype="multipart/form-data">
+            <p class="paginaMenor">
+                DATOS DEL PLATILLO
+            </p>
+            <p class="pagina-0">
+                Escribe los siguientes datos solicitafos de manera cuidadosa y correcta. Los datos se tomarán en cuenta para que se agregue el platillo al menú.
+            </p>
+
+            <p class="pagina-1">
+                <input type="hidden" name="id"  value="{{ alimento[0] }}">
+                <label for="nombre">Nombre del Platillo</label><br>
+                <input type="text" id="nombre" name="nombre" value="{{alimento[1]}}"><br>
+                <label for="descripcion">Breve descripción</label><br>
+                <input type="text" id="descripcion" name="descripcion" value="{{alimento[2]}}" required><br>
+                <label for="precio">Precio en pesos mexicanos</label><br>
+                <input type="text" id="precio" name="precio" value="{{alimento[4]}}"  required><br>
+                
+            </p>
+            <p class="paginaMenor">
+                MENÚ A AGREGAR
+            </p>
+            <p class="pagina-0">
+                ¿En qué menú se puede agregar?
+            </p class="formulario">
+            <p class="pagina-1">
+                <input type="checkbox" id="m1" name="m1" value="desayuno">
+                <label for="m1"> Desayuno</label><br>
+                <input type="checkbox" id="m2" name="m2" value="comida">
+                <label for="m2"> Comida</label><br>
+                <input type="checkbox" id="m3" name="m3" value="cena">
+                <label for="m3"> Cena </label>
+            </p>
+
+            <p class="pagina-0">
+                <button id="botonEnviar" type="submit" class="btn btn-success">Actualizar Platillo</button>
+            </p>
+        </form>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+
+  <title>CAT~FETERIA</title>
+
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+
+</head>
+
+<body>
+
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-cente">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+      <img src="{{ url_for('static', filename='assets/img/gattito.png') }}" alt="logo" width="60" height="48" class="d-inline-block align-text-top">
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#menu">Menú</a></li>
+          <li><a class="nav-link scrollto" href="#cats">Nuestros Gatos</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('adopcionAdmin') }}">Adopción</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+      <div class="row">
+        <div class="col-lg-8">
+          <h1>Bienvenido a <span>CAT~FETERIA</span></h1>
+          <h2>La cafeteria más gatuna</h2>
+
+          <div class="btns">
+            <a href="#menu" class="btn-menu animated fadeInUp scrollto">Menú</a>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!-- ======= Menu Section ======= -->
+    <section id="menu" class="menu section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2 id="menu-title">Menu</h2>
+          <p>Revisa nuestro menú</p>
+        </div>
+
+        <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+          {% for  alimento in menu %}
+          <!-- Item -->
+          <div id="menu-item-miaucronizadas" class="col-lg-6 menu-item ">
+            <img id="menu-img-miaucronizadas" src="data:image/png;base64,{{ alimento[3] }}" class="menu-img" alt="">
+            <div class="menu-content">
+              <a id="menu-nombre-miaucronizadas" href="#">{{alimento[1]}} - </a><span id="menu-precio-miaucronizadas">${{alimento[4]}}</span>
+            </div>
+            <div id="menu-descrip-miaucronizadas" class="menu-ingredients">
+              {{alimento[2]}}
+            </div>
+            <div id="menu-botones" class="menu-ingredients">
+              <form action="{{ url_for('editarPlatillo') }}" method="POST"><input type="hidden" name="id"  value="{{ alimento[0] }}">
+                <p class="pagina-0">
+                  <button id="botonEnviar" type="submit" class="btn btn-success">Editar</button>
+                </p>
+              </form>
+              
+              <form onsubmit="return confirm('Are you sure you want to DELETE this Student from the Database?');" action="{{ url_for('eliminarP') }}" method="POST"><input type="hidden" name="id"  value="{{ alimento[0] }}">
+                <p class="pagina-0">
+                  <button id="botonEnviar" type="submit" class="btn btn-success">Eliminar</button>
+                </p>
+              </form>
+            
+            </div>  
+          </div>
+
+          
+          {% endfor %}
+          
+        </div>
+
+        <section id="bot" class="d-flex align-items-center">
+          <a href="#menu" id="btn1" class="book-a-table-btn scrollto d-none d-lg-flex">Desayuno</a>
+          <a href="#menu" id="btn2" class="book-a-table-btn scrollto d-none d-lg-flex">Comida</a>
+          <a href="#menu" id="btn3" class="book-a-table-btn scrollto d-none d-lg-flex">Cena</a>
+        </section>
+        <div id="agregarP" class="menu-ingredients">
+          <a href="{{ url_for('agregarPlatillo') }}" class="book-a-table-btn scrollto d-none d-lg-flex">AGREGAR</a>
+          
+        </div>
+
+      </div>
+    </section>
+    <!-- End Menu Section -->
+
+
+
+    <!-- ======= Cats Section ======= -->
+    <section id="cats" class="events">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Gatos</h2>
+          <p>Conoce a nuestros gatos</p>
+        </div>
+
+        <div class="events-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+            {% for  gati in gato %}
+            <div class="swiper-slide">
+              
+              <div class="row event-item">
+                <div class="col-lg-6">
+                  <img src="data:image/jpg;base64,{{ gati[4] }}" class="img-fluid" alt="" id="firstCat">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                  <h3 id="namecat1">{{gati[1]}}</h3>
+                  <div class="price">
+                    <p><span id="catspecies1">{{gati[3]}}</span></p>
+                  </div>
+                  <p class="fst-italic" id="descrip1_1">
+                    {{gati[2]}}</p>
+                  
+                </div>
+              </div>
+              <div id="menu-botones" class="menu-ingredients">
+                <form action="{{ url_for('editarGato') }}" method="POST"><input type="hidden" name="id"  value="{{ gati[0] }}">
+                  <p class="pagina-0">
+                    <button id="botonEnviar" type="submit" class="btn btn-success">Editar</button>
+                  </p>
+                </form>
+                <form onsubmit="return confirm('Seguro que quieres eliminar este gato de la base de datos');" action="{{ url_for('eliminarG') }}" method="POST"><input type="hidden" name="id"  value="{{ gati[0] }}">
+                  <p class="pagina-0">
+                    <button id="botonEnviar" type="submit" class="btn btn-success">Eliminar</button>
+                  </p>
+                </form>
+              </div> 
+
+              
+
+            </div><!-- End First cat -->
+
+            {% endfor %}
+           
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+        <div id="agregarC" class="menu-ingredients">
+          <a href="{{ url_for('agregarGato') }}" class="book-a-table-btn scrollto d-none d-lg-flex">AGREGAR</a>
+        </div>
+
+      </div>
+    </section><!-- End Cats Section -->
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>CAT~FETERIA</h3>
+              <p>
+                Diego Roque de Rosas <br>
+                Santiago Calderón Ortega<br>
+                Alexis Chávez Juárez<br>
+                David Alberto Padrón Sánchez<br>
+                <br>
+                <strong>Profesor:</strong> José Ángel Martinez Navarro<br>
+                <strong>Campus:</strong> Ciudad de México<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5 col-md-6 footer-links">
+            <h4>Acerca de nosotros</h4>
+            <ul>
+              <li><i class="bi bi-check-circled"></i> Descripcion</li>
+              <li><i class="bi bi-check-circled"></i> Descripcion</li>
+              <li><i class="bi bi-check-circled"></i> Descripcion</li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Si tienes alguna sugerencia</h4>
+            <p>Mandanos correo</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </footer><!-- End Footer -->
+
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+
+</html>
